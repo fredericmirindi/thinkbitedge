@@ -1,108 +1,711 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>ThinkBit Edge Corp.</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThinkBit Edge Corp - Empowering Youth Through Technology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .gradient-bg {
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+        }
+        .hero-pattern {
+            background-color: #f9fafb;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23a5b4fc' fill-opacity='0.15'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
+        }
+        .testimonial-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.2) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .team-card:hover .social-icons {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .social-icons {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        
+        /* Multi-page system */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <div class="logo">ThinkBit Edge Corp.</div>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#programs">Programs</a></li>
-        <li><a href="#community">Community</a></li>
-        <li><a href="#partners">Partners</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <a href="#join" class="cta-btn">Join Us</a>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#3b82f6"/>
+                    <path d="M2 17L12 22L22 17" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="font-bold text-xl text-gray-800 cursor-pointer" onclick="showPage('home')">ThinkBit Edge</span>
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#" onclick="showPage('home')" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300">Home</a>
+                <a href="#" onclick="showPage('programs')" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300">Programs</a>
+                <a href="#" onclick="showPage('support')" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300">Support Us</a>
+                <a href="#" onclick="showPage('home', 'team')" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300">Our Team</a>
+                <a href="#" onclick="showPage('home', 'impact')" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300">Impact</a>
+                <a href="#" onclick="showPage('home', 'contact')" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300">Contact</a>
+            </div>
+            
+            <div class="hidden md:block">
+                <button onclick="showPage('programs')" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300 transform hover:scale-105">
+                    Get Involved
+                </button>
+            </div>
+            
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-gray-600 hover:text-blue-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white pb-4 px-4">
+            <a href="#" onclick="showPage('home')" class="block py-2 text-gray-600 hover:text-blue-600">Home</a>
+            <a href="#" onclick="showPage('programs')" class="block py-2 text-gray-600 hover:text-blue-600">Programs</a>
+            <a href="#" onclick="showPage('support')" class="block py-2 text-gray-600 hover:text-blue-600">Support Us</a>
+            <a href="#" onclick="showPage('home', 'team')" class="block py-2 text-gray-600 hover:text-blue-600">Our Team</a>
+            <a href="#" onclick="showPage('home', 'impact')" class="block py-2 text-gray-600 hover:text-blue-600">Impact</a>
+            <a href="#" onclick="showPage('home', 'contact')" class="block py-2 text-gray-600 hover:text-blue-600">Contact</a>
+            <button onclick="showPage('programs')" class="mt-3 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+                Get Involved
+            </button>
+        </div>
     </nav>
-  </header>
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Empowering Youth in Emerging Technologies</h1>
-      <p>
-        ThinkBit Edge Corp. is dedicated to inspiring, educating, and supporting the next generation of innovators, especially those from underrepresented groups. We bridge the digital divide by providing equitable and engaging access to high-quality education in AI and new technologies.
-      </p>
-      <a href="#programs" class="cta-btn">Explore Our Programs</a>
-    </div>
-    <img src="images/hero-youth-tech.jpg" alt="Diverse youth learning technology" class="hero-img">
-  </section>
 
-  <section id="about" class="about-section">
-    <h2>Our Purpose</h2>
-    <p>
-      We aim to make learning opportunities in emerging tech accessible, engaging, and inclusive. Through innovative programs, partnerships, and community outreach, we foster a diverse community of future leaders equipped to thrive in the rapidly evolving world of technology.
-    </p>
-  </section>
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section id="home-hero" class="hero-pattern pt-28 pb-20">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight mb-4">
+                            Empowering Youth Through <span class="text-blue-600">Technology</span>
+                        </h1>
+                        <p class="text-lg text-gray-600 mb-8">
+                            ThinkBit Edge Corp is dedicated to providing equitable access to high-quality education in emerging technologies, especially for underrepresented groups.
+                        </p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                            <button onclick="showPage('programs')" class="gradient-bg text-white font-medium py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105">
+                                Explore Programs
+                            </button>
+                            <button onclick="showPage('support')" class="bg-white text-blue-600 border border-blue-600 font-medium py-3 px-6 rounded-lg hover:bg-blue-50 transition duration-300">
+                                Support Our Mission
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <svg class="w-full h-auto" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="100" y="50" width="400" height="300" rx="20" fill="#EBF4FF" />
+                            <circle cx="300" cy="200" r="80" fill="#DBEAFE" />
+                            <path d="M260 170 L340 170 L340 230 L260 230 Z" fill="#93C5FD" />
+                            <path d="M240 150 L280 150 L280 190 L240 190 Z" fill="#60A5FA" />
+                            <path d="M320 150 L360 150 L360 190 L320 190 Z" fill="#60A5FA" />
+                            <path d="M240 210 L280 210 L280 250 L240 250 Z" fill="#3B82F6" />
+                            <path d="M320 210 L360 210 L360 250 L320 250 Z" fill="#3B82F6" />
+                            <circle cx="180" cy="120" r="30" fill="#BFDBFE" />
+                            <circle cx="420" cy="120" r="30" fill="#BFDBFE" />
+                            <circle cx="180" cy="280" r="30" fill="#BFDBFE" />
+                            <circle cx="420" cy="280" r="30" fill="#BFDBFE" />
+                            <path d="M150 100 L210 100 L210 140 L150 140 Z" fill="#93C5FD" />
+                            <path d="M390 100 L450 100 L450 140 L390 140 Z" fill="#93C5FD" />
+                            <path d="M150 260 L210 260 L210 300 L150 300 Z" fill="#93C5FD" />
+                            <path d="M390 260 L450 260 L450 300 L390 300 Z" fill="#93C5FD" />
+                            <circle cx="300" cy="200" r="15" fill="#2563EB" />
+                            <path d="M290 190 L310 190 L310 210 L290 210 Z" fill="#1D4ED8" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <section id="programs" class="programs-section">
-    <h2>Our Programs</h2>
-    <div class="programs-list">
-      <div class="program-card">
-        <h3>AI for Youth Bootcamp</h3>
-        <p>Hands-on workshops introducing artificial intelligence, machine learning, and data science fundamentals for beginners.</p>
-      </div>
-      <div class="program-card">
-        <h3>Mentorship & Support</h3>
-        <p>Personalized mentorship programs connecting students with industry experts and tech leaders.</p>
-      </div>
-      <div class="program-card">
-        <h3>Community Hackathons</h3>
-        <p>Collaborative events focused on solving real-world challenges using technology, open to all skill levels.</p>
-      </div>
-      <div class="program-card">
-        <h3>Outreach & Partnerships</h3>
-        <p>Working with schools and organizations to reach underrepresented youth and provide resources for success.</p>
-      </div>
-    </div>
-  </section>
+        <!-- Stats Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="text-center p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition duration-300">
+                        <h3 class="text-4xl font-bold text-blue-600 mb-2">5,000+</h3>
+                        <p class="text-gray-600">Students Empowered</p>
+                    </div>
+                    <div class="text-center p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition duration-300">
+                        <h3 class="text-4xl font-bold text-blue-600 mb-2">25+</h3>
+                        <p class="text-gray-600">Community Partners</p>
+                    </div>
+                    <div class="text-center p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition duration-300">
+                        <h3 class="text-4xl font-bold text-blue-600 mb-2">12</h3>
+                        <p class="text-gray-600">Educational Programs</p>
+                    </div>
+                    <div class="text-center p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition duration-300">
+                        <h3 class="text-4xl font-bold text-blue-600 mb-2">85%</h3>
+                        <p class="text-gray-600">From Underrepresented Groups</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <section id="community" class="community-section">
-    <h2>Community Voices</h2>
-    <div class="testimonials">
-      <blockquote>
-        "ThinkBit Edge gave me the confidence to explore a career in AI. The mentorship and workshops were life-changing!"<br>
-        <span>- Amina, Student Participant</span>
-      </blockquote>
-      <blockquote>
-        "Their community hackathons helped our students gain hands-on experience and grow their tech skills."<br>
-        <span>- Mr. Lee, Partner School</span>
-      </blockquote>
-    </div>
-    <a href="#join" class="cta-btn">Get Involved</a>
-  </section>
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Mission</h2>
+                    <div class="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        ThinkBit Edge Corp. is dedicated to empowering youth, especially those from underrepresented groups, by providing equitable access to high-quality education in new technologies, including artificial intelligence (AI).
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Inspire</h3>
+                        <p class="text-gray-600">
+                            We spark curiosity and passion for technology through engaging, hands-on experiences that make learning exciting and accessible.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Educate</h3>
+                        <p class="text-gray-600">
+                            We provide high-quality, relevant curriculum that equips students with the skills needed to succeed in the rapidly evolving world of technology.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Support</h3>
+                        <p class="text-gray-600">
+                            We create inclusive communities where students feel valued, connected, and empowered to pursue their interests in technology.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <section id="partners" class="partners-section">
-    <h2>Our Partners</h2>
-    <p>We collaborate with industry leaders, educational institutions, and community organizations to expand our impact.</p>
-    <div class="partner-logos">
-      <!-- Add partner logos here -->
-      <img src="images/partner1-logo.png" alt="Partner 1">
-      <img src="images/partner2-logo.png" alt="Partner 2">
-      <!-- ... -->
-    </div>
-  </section>
+        <!-- Programs Section -->
+        <section id="programs-preview" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Programs</h2>
+                    <div class="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        We offer a variety of innovative programs designed to make technology education accessible, engaging, and inclusive for all youth.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="program-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                        <div class="h-48 bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
+                            <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-3">AI Explorers</h3>
+                            <p class="text-gray-600 mb-4">
+                                A hands-on program introducing students to artificial intelligence concepts through interactive projects and real-world applications.
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-blue-600">Ages 12-18</span>
+                                <button onclick="showPage('ai-explorers')" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                                    Learn More
+                                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="program-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                        <div class="h-48 bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                            <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-3">Code Creators</h3>
+                            <p class="text-gray-600 mb-4">
+                                Learn programming fundamentals while building creative projects that solve real community problems.
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-blue-600">Ages 10-16</span>
+                                <button onclick="showPage('code-creators')" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                                    Learn More
+                                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="program-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                        <div class="h-48 bg-gradient-to-r from-green-500 to-teal-500 flex items-center justify-center">
+                            <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-3">Tech Mentorship</h3>
+                            <p class="text-gray-600 mb-4">
+                                Connect with industry professionals who provide guidance, support, and real-world insights into tech careers.
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-blue-600">Ages 14-21</span>
+                                <button onclick="showPage('tech-mentorship')" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                                    Learn More
+                                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button onclick="showPage('programs')" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">
+                        View All Programs
+                    </button>
+                </div>
+            </div>
+        </section>
 
-  <section id="contact" class="contact-section">
-    <h2>Contact Us</h2>
-    <form>
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
+        <!-- Team Section -->
+        <section id="team" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Leadership</h2>
+                    <div class="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        Meet the visionary directors behind ThinkBit Edge Corp who are dedicated to bridging the digital divide and empowering the next generation of tech innovators.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Director 1 -->
+                    <div class="team-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 text-center group">
+                        <div class="relative">
+                            <div class="h-64 bg-gradient-to-b from-blue-400 to-blue-600 flex items-center justify-center">
+                                <svg class="w-32 h-32 text-white opacity-30" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-32 h-32 rounded-full bg-white p-2">
+                                    <div class="w-full h-full rounded-full bg-gray-200 flex items-center justify-center">
+                                        <svg class="w-16 h-16 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Frédéric Mirindi</h3>
+                            <p class="text-blue-600 font-medium mb-4">Executive Director</p>
+                            <p class="text-gray-600 mb-6">
+                                Leading ThinkBit Edge's mission to create equitable access to technology education and empower underrepresented youth.
+                            </p>
+                            <div class="social-icons flex justify-center space-x-4">
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.054 10.054 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Director 2 -->
+                    <div class="team-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 text-center group">
+                        <div class="relative">
+                            <div class="h-64 bg-gradient-to-b from-purple-400 to-purple-600 flex items-center justify-center">
+                                <svg class="w-32 h-32 text-white opacity-30" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-32 h-32 rounded-full bg-white p-2">
+                                    <div class="w-full h-full rounded-full bg-gray-200 flex items-center justify-center">
+                                        <svg class="w-16 h-16 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Derrick Mirindi</h3>
+                            <p class="text-blue-600 font-medium mb-4">Technology Director</p>
+                            <p class="text-gray-600 mb-6">
+                                Overseeing curriculum development and ensuring our programs incorporate cutting-edge technology and educational approaches.
+                            </p>
+                            <div class="social-icons flex justify-center space-x-4">
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.054 10.054 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Director 3 -->
+                    <div class="team-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 text-center group">
+                        <div class="relative">
+                            <div class="h-64 bg-gradient-to-b from-indigo-400 to-indigo-600 flex items-center justify-center">
+                                <svg class="w-32 h-32 text-white opacity-30" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-32 h-32 rounded-full bg-white p-2">
+                                    <div class="w-full h-full rounded-full bg-gray-200 flex items-center justify-center">
+                                        <svg class="w-16 h-16 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Patrice Mirindi</h3>
+                            <p class="text-blue-600 font-medium mb-4">Partnerships Director</p>
+                            <p class="text-gray-600 mb-6">
+                                Building strategic relationships with community organizations, schools, and corporate partners to expand our reach and impact.
+                            </p>
+                            <div class="social-icons flex justify-center space-x-4">
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.054 10.054 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">
+                        Connect With Our Team
+                    </a>
+                </div>
+            </div>
+        </section>
 
-  <footer>
-    <div>
-      &copy; 2025 ThinkBit Edge Corp. | Empowering Youth in Technology
-    </div>
-    <div>
-      <a href="#privacy">Privacy Policy</a>
-    </div>
-  </footer>
-</body>
-</html>
+        <!-- Impact Section -->
+        <section id="impact" class="py-20 gradient-bg">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-white mb-4">Our Impact</h2>
+                    <div class="w-24 h-1 bg-white mx-auto mb-8"></div>
+                    <p class="text-lg text-white opacity-90 max-w-3xl mx-auto">
+                        We're making a difference in the lives of young people and communities across the country.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="testimonial-card p-8 rounded-xl">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mr-4">
+                                <svg class="w-10 h-10 text-blue-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Jasmine T.</h4>
+                                <p class="text-white opacity-80">AI Explorers Program Graduate</p>
+                            </div>
+                        </div>
+                        <p class="text-white opacity-90 italic">
+                            "Before joining ThinkBit Edge, I never thought a career in AI was possible for me. Now I'm studying computer science at university and interning at a tech company. This program changed my life."
+                        </p>
+                    </div>
+                    
+                    <div class="testimonial-card p-8 rounded-xl">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mr-4">
+                                <svg class="w-10 h-10 text-blue-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Marcus J.</h4>
+                                <p class="text-white opacity-80">Code Creators Participant</p>
+                            </div>
+                        </div>
+                        <p class="text-white opacity-90 italic">
+                            "I used to think coding was boring until I joined Code Creators. We built an app that helps elderly people in our community, and seeing how technology can make a real difference was eye-opening."
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-16">
+                    <h3 class="text-2xl font-semibold text-white text-center mb-10">Our Partners</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                        <div class="bg-white bg-opacity-20 p-6 rounded-lg flex items-center justify-center">
+                            <div class="text-white font-bold text-xl">TechForward</div>
+                        </div>
+                        <div class="bg-white bg-opacity-20 p-6 rounded-lg flex items-center justify-center">
+                            <div class="text-white font-bold text-xl">FutureLearn</div>
+                        </div>
+                        <div class="bg-white bg-opacity-20 p-6 rounded-lg flex items-center justify-center">
+                            <div class="text-white font-bold text-xl">InnovatEd</div>
+                        </div>
+                        <div class="bg-white bg-opacity-20 p-6 rounded-lg flex items-center justify-center">
+                            <div class="text-white font-bold text-xl">DigiSkills</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Get Involved Section -->
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Get Involved</h2>
+                    <div class="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        There are many ways to support our mission of empowering youth through technology education.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Volunteer</h3>
+                        <p class="text-gray-600 mb-6">
+                            Share your skills and knowledge as a mentor, instructor, or event volunteer.
+                        </p>
+                        <button onclick="showPage('support')" class="text-blue-600 hover:text-blue-800 font-medium">Learn More →</button>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Donate</h3>
+                        <p class="text-gray-600 mb-6">
+                            Support our programs financially to help us reach more students and communities.
+                        </p>
+                        <button onclick="showPage('support')" class="text-blue-600 hover:text-blue-800 font-medium">Contribute →</button>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Partner</h3>
+                        <p class="text-gray-600 mb-6">
+                            Collaborate with us as a corporate or community partner to expand our impact.
+                        </p>
+                        <button onclick="showPage('support')" class="text-blue-600 hover:text-blue-800 font-medium">Partner With Us →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="py-16 bg-blue-600">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-2xl font-bold text-white mb-4">Stay Updated</h2>
+                    <p class="text-white opacity-90 mb-8">
+                        Subscribe to our newsletter to receive updates about our programs, events, and impact.
+                    </p>
+                    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                        <input type="email" placeholder="Your email address" class="flex-grow py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        <button class="bg-white text-blue-600 font-medium py-3 px-6 rounded-lg hover:bg-blue-50 transition duration-300">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Contact Us</h2>
+                    <div class="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        Have questions or want to learn more about our programs? We'd love to hear from you.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <form class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                                <input type="text" id="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-gray-50 p-8 rounded-lg h-full">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-6">Get In Touch</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                        <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800 mb-1">Address</h4>
+                                        <p class="text-gray-600">123 Innovation Way<br>Tech City, TC 12345</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                        <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800 mb-1">Phone</h4>
+                                        <p class="text-gray-600">(204) 298-4337</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                        <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800 mb-1">Email</h4>
+                                        <p class="text-gray-600">info@thinkbitedge.org</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8">
+                                <h4 class="font-medium text-gray-800 mb-4">Follow Us</h4>
+                                <div class="flex space-x-4">
+                                    <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition duration-300">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center text-white hover:bg-blue-500 transition duration-300">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.054 10.054 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0```

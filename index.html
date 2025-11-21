@@ -283,10 +283,35 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 3D Placeholder -->
-                    <div class="hidden md:flex h-96 items-center justify-center relative">
-                        <!-- A visual circle to help frame the 3D particles behind it -->
-                        <div class="absolute w-[500px] h-[500px] bg-[var(--accent-color)] opacity-5 rounded-full blur-3xl"></div>
+                    
+                    <!-- Video Section: ThinkBitEdge Brand Video -->
+                    <div class="hidden md:flex h-96 items-center justify-center relative group">
+                        <!-- Decorative glow behind the video -->
+                        <div class="absolute w-[120%] h-[120%] bg-[var(--accent-color)] opacity-10 rounded-full blur-3xl -z-10 transition-opacity duration-500 group-hover:opacity-20"></div>
+                        
+                        <!-- Video Card -->
+                        <div class="glass-card p-3 rounded-2xl w-full max-w-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl border border-[var(--glass-border)]">
+                            <div class="relative w-full pt-[56.25%] rounded-xl overflow-hidden bg-black shadow-inner">
+                                <!-- HTML5 Video Embed (GitHub Raw Source) -->
+                                <video class="absolute top-0 left-0 w-full h-full object-cover" controls autoplay muted loop playsinline>
+                                    <source src="https://raw.githubusercontent.com/fredericmirindi/thinkbitedge/main/Video_Generation_for_ThinkBit_Edge_Corp.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <!-- Overlay for branding -->
+                                <div class="absolute top-4 left-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 pointer-events-none">
+                                    <span class="text-[10px] font-bold text-white uppercase tracking-wider">Official Intro</span>
+                                </div>
+                            </div>
+                            <div class="p-4 flex justify-between items-center">
+                                <div>
+                                    <h3 class="text-[var(--text-main)] font-bold text-sm">ThinkBitEdge: Bridging the Gap</h3>
+                                    <p class="text-[var(--text-muted)] text-xs mt-1">How we are reshaping AI literacy in Canada.</p>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-[var(--accent-color)]/20 flex items-center justify-center text-[var(--accent-color)] group-hover:bg-[var(--accent-color)] group-hover:text-white transition-colors cursor-pointer">
+                                    <i class="fas fa-play ml-1 text-sm"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -421,7 +446,7 @@
                     <div class="h-48 bg-gradient-to-b from-blue-600 to-[var(--bg-color)] relative flex items-end justify-center pb-4">
                         <div class="w-32 h-32 rounded-full border-4 border-[var(--bg-color)] overflow-hidden bg-gray-800">
                             <!-- Profile Placeholder -->
-                            <img src="https://ui-avatars.com/api/?name=Frederic+Mirindi&background=0D8ABC&color=fff&size=200" alt="Frédéric Mirindi" class="w-full h-full object-cover">
+                            <img src="https://raw.githubusercontent.com/fredericmirindi/thinkbitedge/main/fredericprofil.jpeg" alt="Frédéric Mirindi" class="w-full h-full object-cover">
                         </div>
                     </div>
                     <div class="p-6 text-center">
@@ -437,7 +462,7 @@
                 <div class="glass-card rounded-2xl overflow-hidden group">
                     <div class="h-48 bg-gradient-to-b from-green-600 to-[var(--bg-color)] relative flex items-end justify-center pb-4">
                         <div class="w-32 h-32 rounded-full border-4 border-[var(--bg-color)] overflow-hidden bg-gray-800">
-                            <img src="https://ui-avatars.com/api/?name=Derrick+Mirindi&background=10b981&color=fff&size=200" alt="Derrick Mirindi" class="w-full h-full object-cover">
+                            <img src="https://raw.githubusercontent.com/fredericmirindi/thinkbitedge/main/Derrick%20Mirindi.png" alt="Derrick Mirindi" class="w-full h-full object-cover">
                         </div>
                     </div>
                     <div class="p-6 text-center">
@@ -453,7 +478,7 @@
                 <div class="glass-card rounded-2xl overflow-hidden group">
                     <div class="h-48 bg-gradient-to-b from-purple-600 to-[var(--bg-color)] relative flex items-end justify-center pb-4">
                         <div class="w-32 h-32 rounded-full border-4 border-[var(--bg-color)] overflow-hidden bg-gray-800">
-                            <img src="https://ui-avatars.com/api/?name=Patrice+Mirindi&background=8b5cf6&color=fff&size=200" alt="Patrice Mirindi" class="w-full h-full object-cover">
+                            <img src="https://raw.githubusercontent.com/fredericmirindi/thinkbitedge/main/patricemirindi.jpg" alt="Patrice Mirindi" class="w-full h-full object-cover">
                         </div>
                     </div>
                     <div class="p-6 text-center">

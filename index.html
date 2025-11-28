@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThinkBitEdge Corp. | AI Literacy Canada</title>
+    <title>ThinkBit Edge Inc. | NGO & Research</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -14,11 +14,18 @@
                 extend: {
                     colors: {
                         border: "var(--glass-border)",
+                    },
+                    fontFamily: {
+                        sans: ['Abadi', 'Abadi MT Condensed Light', 'Questrial', 'sans-serif'],
+                        serif: ['EB Garamond', 'Garamond', 'serif'],
                     }
                 }
             }
         }
     </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Questrial&display=swap" rel="stylesheet">
     
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -28,36 +35,31 @@
 
     <style>
         :root {
-            /* Dark Mode (Default) - Cyberpunk/Tech Vibe */
-            --bg-color: #020617; /* Slate 950 */
+            --bg-color: #030712; 
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --glass-bg: rgba(15, 23, 42, 0.4); /* Darker glass */
+            --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.1);
-            
-            /* Brand Colors: "Electric Green" & "Digital Blue" for AI/Growth */
-            --accent-color: #10b981; /* Emerald 500 */
-            --accent-hover: #34d399;
-            --gradient-start: #3b82f6; /* Blue */
-            --gradient-end: #10b981; /* Green */
+            --accent-color: #0ea5e9; 
+            --accent-glow: rgba(14, 165, 233, 0.3);
+            --gradient-start: #0ea5e9;
+            --gradient-end: #6366f1; 
         }
 
         html.light {
-            /* Light Mode - Clean Education Vibe */
-            --bg-color: #f0f9ff;
+            --bg-color: #f8fafc;
             --text-main: #0f172a;
             --text-muted: #475569;
-            --glass-bg: rgba(255, 255, 255, 0.6);
-            --glass-border: rgba(0, 0, 0, 0.05);
-            
-            --accent-color: #0ea5e9; /* Sky Blue */
-            --accent-hover: #0284c7;
-            --gradient-start: #2563eb;
-            --gradient-end: #06b6d4;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --accent-color: #0369a1; 
+            --accent-glow: rgba(3, 105, 161, 0.15);
+            --gradient-start: #0369a1;
+            --gradient-end: #4338ca;
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', sans-serif; /* Modern, clean font for tech */
+            font-family: 'Abadi', 'Abadi MT Condensed Light', 'Questrial', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             overflow-x: hidden;
@@ -65,9 +67,14 @@
             transition: background-color 0.5s ease, color 0.5s ease;
         }
 
-        h1, h2, h3 {
-            font-family: 'Montserrat', sans-serif; /* Stronger headers */
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'EB Garamond', serif;
             letter-spacing: -0.02em;
+        }
+        
+        .font-body {
+            font-family: 'Abadi', 'Abadi MT Condensed Light', 'Questrial', sans-serif;
+            letter-spacing: 0.03em;
         }
 
         #canvas-container {
@@ -81,35 +88,38 @@
             transition: background-color 0.5s ease;
         }
 
-        /* Glassmorphism */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-card:hover {
             border-color: var(--accent-color);
             transform: translateY(-4px);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 25px var(--accent-glow);
         }
 
-        /* Navigation */
         .nav-link {
             position: relative;
             color: var(--text-muted);
             transition: color 0.3s ease;
+            text-transform: uppercase;
+            font-family: 'Abadi', 'Questrial', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            font-weight: 600;
         }
 
         .nav-link::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 2px;
-            bottom: -5px;
+            height: 1px;
+            bottom: -4px;
             left: 0;
             background-color: var(--accent-color);
             transition: width 0.3s ease;
@@ -123,404 +133,767 @@
             width: 100%;
         }
 
-        /* Page Logic */
+        /* Page Transitions */
         .page-section {
             display: none;
-            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         .page-section.active {
             display: block;
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeIn 0.6s ease-out forwards;
         }
 
-        @keyframes fadeInUp {
+        @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Typography Utilities */
-        .text-gradient-tech {
+        .text-gradient {
             background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Buttons */
-        .btn-tech {
-            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-            color: white;
-            border: none;
+        .btn-primary {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
             position: relative;
             overflow: hidden;
             z-index: 1;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            font-family: 'Abadi', sans-serif;
         }
 
-        .btn-tech:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
         }
 
-        /* Theme Toggle */
+        .btn-primary:hover::before { transform: scaleX(1); }
+        .btn-primary:hover { border-color: transparent; }
+
         .theme-toggle {
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: var(--text-main);
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            transition: all 0.3s;
         }
         .theme-toggle:hover {
-            background: var(--glass-bg);
             color: var(--accent-color);
+            background: var(--glass-bg);
             border-color: var(--accent-color);
         }
 
-        ::-webkit-scrollbar { width: 8px; }
+        /* Timeline Connector */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--glass-border) 0%, var(--accent-color) 50%, var(--glass-border) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        /* Image Styling */
+        .story-img, .curriculum-img {
+            filter: grayscale(20%);
+            transition: all 0.5s ease;
+        }
+        .story-img:hover, .curriculum-img:hover {
+            filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+        
+        .logo-svg path { fill: url(#logoGradient); }
     </style>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-[var(--accent-color)] selection:text-white">
 
     <!-- 3D Background -->
     <div id="canvas-container"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 top-0 border-b border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-md transition-colors duration-500">
+    <nav class="fixed w-full z-50 top-0 border-b border-[var(--glass-border)] bg-[var(--bg-color)]/80 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex-shrink-0 cursor-pointer flex items-center gap-2" onclick="navigateTo('home')">
-                    <!-- Simple Logo Icon -->
-                    <div class="w-8 h-8 bg-gradient-to-tr from-blue-500 to-green-400 rounded-lg flex items-center justify-center text-white font-bold text-sm">TB</div>
-                    <h1 class="text-xl font-bold tracking-wider text-[var(--text-main)]">ThinkBitEdge<span class="text-[var(--accent-color)]">.</span></h1>
-                </div>
-                <div class="hidden md:flex items-center space-x-6">
-                    <div class="flex items-baseline space-x-6">
-                        <button onclick="navigateTo('home')" class="nav-link active text-sm font-medium" id="nav-home">Home</button>
-                        <button onclick="navigateTo('mission')" class="nav-link text-sm font-medium" id="nav-mission">Our Mission</button>
-                        <button onclick="navigateTo('programs')" class="nav-link text-sm font-medium" id="nav-programs">Programs</button>
-                        <button onclick="navigateTo('team')" class="nav-link text-sm font-medium" id="nav-team">Team</button>
-                        <button onclick="navigateTo('contact')" class="nav-link text-sm font-medium" id="nav-contact">Contact</button>
+            <div class="flex items-center justify-between h-24">
+                <!-- Custom Logo -->
+                <div class="flex-shrink-0 cursor-pointer flex items-center gap-3 group" onclick="navigateTo('home')">
+                    <!-- SVG Logo: Neural Node -->
+                    <svg class="w-10 h-10 logo-svg group-hover:scale-110 transition-transform duration-300" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:var(--gradient-start);stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:var(--gradient-end);stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M50 5 L90 27 L90 73 L50 95 L10 73 L10 27 Z" fill="none" stroke="url(#logoGradient)" stroke-width="4"/>
+                        <circle cx="50" cy="50" r="12" fill="url(#logoGradient)" opacity="0.8" />
+                        <circle cx="50" cy="25" r="5" fill="url(#logoGradient)" />
+                        <circle cx="28" cy="62" r="5" fill="url(#logoGradient)" />
+                        <circle cx="72" cy="62" r="5" fill="url(#logoGradient)" />
+                        <line x1="50" y1="50" x2="50" y2="25" stroke="url(#logoGradient)" stroke-width="2" />
+                        <line x1="50" y1="50" x2="28" y2="62" stroke="url(#logoGradient)" stroke-width="2" />
+                        <line x1="50" y1="50" x2="72" y2="62" stroke="url(#logoGradient)" stroke-width="2" />
+                    </svg>
+                    
+                    <div class="flex flex-col">
+                        <span class="text-2xl leading-none font-bold text-[var(--text-main)] font-sans tracking-wide">ThinkBit</span>
+                        <span class="text-sm leading-none font-serif italic text-gradient font-semibold">Edge Inc.</span>
                     </div>
-                    <button onclick="toggleTheme()" class="theme-toggle ml-4" aria-label="Toggle Mode">
+                </div>
+                
+                <!-- Desktop Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <button onclick="navigateTo('home')" class="nav-link active" id="nav-home">Home</button>
+                    <button onclick="navigateTo('research')" class="nav-link" id="nav-research">Research</button>
+                    <button onclick="navigateTo('training')" class="nav-link" id="nav-training">Training</button>
+                    <button onclick="navigateTo('publications')" class="nav-link" id="nav-publications">Publications</button>
+                    <button onclick="navigateTo('contact')" class="nav-link" id="nav-contact">Volunteer</button>
+                    
+                    <div class="h-6 w-px bg-[var(--glass-border)] mx-2"></div>
+
+                    <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle Theme">
                         <i class="fas fa-moon" id="theme-icon"></i>
                     </button>
                 </div>
-                <div class="-mr-2 flex md:hidden items-center gap-4">
-                    <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle Mode">
+
+                <!-- Mobile Controls -->
+                <div class="flex md:hidden items-center gap-4">
+                    <button onclick="toggleTheme()" class="theme-toggle">
                         <i class="fas fa-moon" id="theme-icon-mobile"></i>
                     </button>
-                    <button onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-[var(--text-muted)] hover:text-[var(--text-main)] focus:outline-none">
-                        <i class="fas fa-bars"></i>
+                    <button onclick="toggleMobileMenu()" class="text-[var(--text-main)] hover:text-[var(--accent-color)] transition">
+                        <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
+
         <!-- Mobile Menu -->
-        <div class="md:hidden hidden bg-[var(--bg-color)] border-b border-[var(--glass-border)]" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <button onclick="navigateTo('home')" class="block px-3 py-2 rounded-md text-base font-medium text-[var(--text-main)] w-full text-left">Home</button>
-                <button onclick="navigateTo('mission')" class="block px-3 py-2 rounded-md text-base font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] w-full text-left">Our Mission</button>
-                <button onclick="navigateTo('programs')" class="block px-3 py-2 rounded-md text-base font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] w-full text-left">Programs</button>
-                <button onclick="navigateTo('team')" class="block px-3 py-2 rounded-md text-base font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] w-full text-left">Team</button>
-                <button onclick="navigateTo('contact')" class="block px-3 py-2 rounded-md text-base font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] w-full text-left">Contact</button>
+        <div class="hidden md:hidden bg-[var(--bg-color)] border-b border-[var(--glass-border)] absolute w-full" id="mobile-menu">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <button onclick="navigateTo('home')" class="block w-full text-left py-3 text-[var(--text-main)] font-body font-bold border-b border-[var(--glass-border)]">Home</button>
+                <button onclick="navigateTo('research')" class="block w-full text-left py-3 text-[var(--text-muted)] font-body hover:text-[var(--accent-color)] border-b border-[var(--glass-border)]">Research</button>
+                <button onclick="navigateTo('training')" class="block w-full text-left py-3 text-[var(--text-muted)] font-body hover:text-[var(--accent-color)] border-b border-[var(--glass-border)]">Training</button>
+                <button onclick="navigateTo('publications')" class="block w-full text-left py-3 text-[var(--text-muted)] font-body hover:text-[var(--accent-color)] border-b border-[var(--glass-border)]">Publications</button>
+                <button onclick="navigateTo('contact')" class="block w-full text-left py-3 text-[var(--text-muted)] font-body hover:text-[var(--accent-color)]">Volunteer</button>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 min-h-screen">
-        
+    <main class="pt-28 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 min-h-screen flex flex-col justify-center">
+
         <!-- HOME PAGE -->
         <section id="home" class="page-section active">
-            <div class="min-h-[calc(100vh-8rem)] flex flex-col justify-center pt-10 md:pt-0">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-8 text-center md:text-left">
-                        <div class="inline-block px-4 py-2 rounded-full bg-[var(--glass-bg)] border border-[var(--accent-color)]/30 text-[var(--accent-color)] text-xs font-bold tracking-widest uppercase mb-2">
-                            Artificial Intelligence Literacy
-                        </div>
-                        <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold text-[var(--text-main)] leading-tight">
-                            Democratizing <br>
-                            <span class="text-gradient-tech">Future Tech</span> <br>
-                            in Canada.
-                        </h1>
-                        <p class="text-lg text-[var(--text-muted)] max-w-xl leading-relaxed mx-auto md:mx-0">
-                            <strong>ThinkBitEdge Corp.</strong> is bridging the digital divide. We empower Youth, People of Color, and Indigenous communities with the tools to master Artificial Intelligence and Machine Learning.
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
-                            <button onclick="navigateTo('programs')" class="px-8 py-4 btn-tech rounded-xl font-bold text-lg transition w-full sm:w-auto">
-                                Explore Programs
-                            </button>
-                            <button onclick="navigateTo('mission')" class="px-8 py-4 glass-card text-[var(--text-main)] rounded-xl font-bold transition hover:bg-[var(--glass-bg)] w-full sm:w-auto border border-[var(--glass-border)]">
-                                Learn Our Mission
-                            </button>
-                        </div>
-                        
-                        <div class="pt-8 flex items-center justify-center md:justify-start gap-8 text-[var(--text-muted)]">
-                            <div class="text-center">
-                                <div class="text-2xl font-bold text-[var(--text-main)]">3+</div>
-                                <div class="text-xs uppercase tracking-wide">Founders</div>
-                            </div>
-                            <div class="h-8 w-px bg-[var(--glass-border)]"></div>
-                            <div class="text-center">
-                                <div class="text-2xl font-bold text-[var(--text-main)]">100%</div>
-                                <div class="text-xs uppercase tracking-wide">Inclusive</div>
-                            </div>
-                            <div class="h-8 w-px bg-[var(--glass-border)]"></div>
-                            <div class="text-center">
-                                <div class="text-2xl font-bold text-[var(--text-main)]">Canada</div>
-                                <div class="text-xs uppercase tracking-wide">Based</div>
-                            </div>
-                        </div>
+            <!-- Hero Header -->
+            <div class="text-center mb-16 max-w-4xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] mb-6">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span class="text-xs uppercase tracking-widest text-[var(--text-muted)] font-body font-bold">Registered Non-Governmental Organization (NGO)</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight text-[var(--text-main)] mb-6">
+                    Democratizing Intelligence <br>
+                    <span class="text-gradient font-serif italic">For Every Child.</span>
+                </h1>
+                <p class="text-xl text-[var(--text-muted)] leading-relaxed font-body font-light">
+                    Talent is equally distributed, but opportunity is not. <strong>ThinkBit Edge Inc.</strong> is dedicated to bringing cutting-edge AI literacy, STEM education, and economic research to the children of the Global South.
+                </p>
+                <div class="flex justify-center gap-4 pt-8">
+                    <button onclick="navigateTo('training')" class="btn-primary px-8 py-4 rounded-lg text-sm font-bold tracking-widest uppercase">
+                        Our Programs
+                    </button>
+                    <button onclick="navigateTo('contact')" class="px-8 py-4 rounded-lg text-sm font-bold tracking-widest uppercase text-[var(--accent-color)] border border-[var(--accent-color)] hover:bg-[var(--accent-color)] hover:text-white transition-all font-body">
+                        Donate / Partner
+                    </button>
+                </div>
+            </div>
+
+            <!-- Visual Story Grid -->
+            <div class="grid md:grid-cols-12 gap-6 items-stretch mb-20">
+                <!-- Large Image (Left) -->
+                <div class="md:col-span-8 glass-card p-2 rounded-2xl relative group overflow-hidden h-96">
+                    <div class="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-md px-3 py-1 rounded text-xs font-bold uppercase text-white">Rural Congo</div>
+                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2070&auto=format&fit=crop" alt="Children learning in Africa" class="w-full h-full object-cover rounded-xl story-img">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/70 to-transparent">
+                        <h3 class="text-2xl font-serif font-bold text-white">Bridging the Divide</h3>
+                        <p class="text-sm text-gray-300 font-body">Bringing tablets and connectivity to villages where electricity is a luxury.</p>
                     </div>
-                    
-                    <!-- Video Section: ThinkBitEdge Brand Video -->
-                    <div class="hidden md:flex h-96 items-center justify-center relative group">
-                        <!-- Decorative glow behind the video -->
-                        <div class="absolute w-[120%] h-[120%] bg-[var(--accent-color)] opacity-10 rounded-full blur-3xl -z-10 transition-opacity duration-500 group-hover:opacity-20"></div>
-                        
-                        <!-- Video Card -->
-                        <div class="glass-card p-3 rounded-2xl w-full max-w-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl border border-[var(--glass-border)]">
-                            <div class="relative w-full pt-[56.25%] rounded-xl overflow-hidden bg-black shadow-inner">
-                                <!-- HTML5 Video Embed (GitHub Raw Source) -->
-                                <video class="absolute top-0 left-0 w-full h-full object-cover" controls autoplay muted loop playsinline>
-                                    <source src="https://raw.githubusercontent.com/fredericmirindi/thinkbitedge/main/Video_Generation_for_ThinkBit_Edge_Corp.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                                <!-- Overlay for branding -->
-                                <div class="absolute top-4 left-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 pointer-events-none">
-                                    <span class="text-[10px] font-bold text-white uppercase tracking-wider">Official Intro</span>
-                                </div>
-                            </div>
-                            <div class="p-4 flex justify-between items-center">
-                                <div>
-                                    <h3 class="text-[var(--text-main)] font-bold text-sm">ThinkBitEdge: Bridging the Gap</h3>
-                                    <p class="text-[var(--text-muted)] text-xs mt-1">How we are reshaping AI literacy in Canada.</p>
-                                </div>
-                                <div class="w-10 h-10 rounded-full bg-[var(--accent-color)]/20 flex items-center justify-center text-[var(--accent-color)] group-hover:bg-[var(--accent-color)] group-hover:text-white transition-colors cursor-pointer">
-                                    <i class="fas fa-play ml-1 text-sm"></i>
-                                </div>
-                            </div>
+                </div>
+
+                <!-- Stacked Images (Right) -->
+                <div class="md:col-span-4 flex flex-col gap-6">
+                    <div class="glass-card p-2 rounded-2xl relative group overflow-hidden h-44">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=2070&auto=format&fit=crop" alt="Students studying outdoors" class="w-full h-full object-cover rounded-xl story-img">
+                    </div>
+                    <div class="glass-card p-2 rounded-2xl relative group overflow-hidden h-44 flex items-center justify-center bg-[var(--glass-bg)]">
+                        <div class="text-center p-4">
+                            <span class="block text-4xl font-bold text-[var(--accent-color)] font-serif mb-1">500+</span>
+                            <span class="text-xs uppercase tracking-widest text-[var(--text-muted)]">Students Impacted</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- MISSION PAGE -->
-        <section id="mission" class="page-section">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-[var(--text-main)] mb-4">Our Core Mission</h2>
-                <p class="text-[var(--text-muted)] max-w-2xl mx-auto">Technology is the great equalizer, but only if access is universal.</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8 mb-16">
-                <div class="glass-card p-8 rounded-2xl text-center group">
-                    <div class="w-16 h-16 mx-auto bg-blue-500/10 rounded-full flex items-center justify-center text-blue-400 mb-6 text-2xl group-hover:scale-110 transition-transform">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-[var(--text-main)] mb-3">AI Literacy</h3>
-                    <p class="text-[var(--text-muted)] text-sm">Demystifying neural networks, data science, and automation tools for non-technical audiences.</p>
-                </div>
-                <div class="glass-card p-8 rounded-2xl text-center group">
-                    <div class="w-16 h-16 mx-auto bg-green-500/10 rounded-full flex items-center justify-center text-green-400 mb-6 text-2xl group-hover:scale-110 transition-transform">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-[var(--text-main)] mb-3">Inclusivity</h3>
-                    <p class="text-[var(--text-muted)] text-sm">Specifically designing curriculums for BIPOC, Indigenous peoples, and underrepresented youth across Canada.</p>
-                </div>
-                <div class="glass-card p-8 rounded-2xl text-center group">
-                    <div class="w-16 h-16 mx-auto bg-purple-500/10 rounded-full flex items-center justify-center text-purple-400 mb-6 text-2xl group-hover:scale-110 transition-transform">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-[var(--text-main)] mb-3">Future Readiness</h3>
-                    <p class="text-[var(--text-muted)] text-sm">Preparing the next generation of Canadian workforce for the demands of the algorithmic economy.</p>
-                </div>
-            </div>
-
-            <div class="glass-card p-10 rounded-3xl flex flex-col md:flex-row items-center gap-10 border-l-4 border-[var(--accent-color)]">
-                <div class="flex-1">
-                    <h3 class="text-3xl font-bold text-[var(--text-main)] mb-4">Why We Started</h3>
-                    <p class="text-[var(--text-muted)] leading-relaxed mb-6">
-                        ThinkBitEdge Corp. was founded on the belief that the tools of tomorrow should not be reserved for the few. As AI reshapes industries, the "literacy gap" threatens to leave entire communities behind. <br><br>
-                        We are here to ensure that the powerful tools of Machine Learning and Data Science are placed in the hands of diverse innovators who will build a more equitable future.
+            <!-- The Vision Story & Leadership -->
+            <div class="glass-card p-10 rounded-3xl border-l-4 border-[var(--accent-color)] relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-[var(--accent-color)] opacity-5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+                
+                <h2 class="text-3xl font-serif font-bold mb-6">The Vision: From the Village to the Valley</h2>
+                
+                <div class="grid md:grid-cols-2 gap-10 font-body text-lg text-[var(--text-muted)] leading-relaxed">
+                    <p>
+                        <span class="text-5xl float-left mr-3 mt-[-10px] font-serif text-[var(--accent-color)]">I</span>n an era where Artificial Intelligence dictates the future of global economies, millions of children in Africa and underdeveloped nations remain disconnected. At <strong>ThinkBit Edge</strong>, we refuse to accept a future where the Global South is merely a consumer of technology rather than a creator.
+                    </p>
+                    <p>
+                        We are building the "Neural Nodes" of the future—classrooms equipped with offline AI models, coding resources, and economic mentorship. We believe that the next Einstein or Turing may currently be sitting in a classroom in Bukavu or rural Nairobi, waiting for the tools to unlock their potential.
                     </p>
                 </div>
-                <div class="flex-shrink-0">
-                    <div class="w-32 h-32 rounded-full bg-gradient-to-br from-blue-500 to-green-500 p-1">
-                        <div class="w-full h-full bg-[var(--bg-color)] rounded-full flex items-center justify-center">
-                            <i class="fas fa-lightbulb text-4xl text-[var(--text-main)]"></i>
+
+                <!-- Leadership Section -->
+                <div class="pt-8 mt-8 border-t border-[var(--glass-border)]">
+                    <h3 class="text-sm font-bold text-[var(--text-muted)] uppercase tracking-wider mb-6 font-body">Leadership</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Frédéric -->
+                        <div class="flex items-center gap-5">
+                            <img src="https://raw.githubusercontent.com/fredericmirindi/frederic.mirindi/main/images/fredericprofil.jpeg" class="w-16 h-16 rounded-full object-cover border border-[var(--glass-border)]" alt="Frédéric Mirindi">
+                            <div>
+                                <p class="text-xl font-serif font-bold text-[var(--text-main)]">Frédéric Mirindi</p>
+                                <p class="text-xs text-[var(--text-muted)] uppercase tracking-wide font-body">Founder & Chairman</p>
+                            </div>
+                        </div>
+                        <!-- Derrick -->
+                        <div class="flex items-center gap-5">
+                            <img src="https://raw.githubusercontent.com/fredericmirindi/thinkbitedge/main/Derrick%20Mirindi.png" class="w-16 h-16 rounded-full object-cover border border-[var(--glass-border)]" alt="Derrick Mirindi">
+                            <div>
+                                <p class="text-xl font-serif font-bold text-[var(--text-main)]">Derrick Mirindi</p>
+                                <p class="text-xs text-[var(--text-muted)] uppercase tracking-wide font-body">Founder & Director</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- PROGRAMS PAGE -->
-        <section id="programs" class="page-section">
+        <!-- RESEARCH PAGE -->
+        <section id="research" class="page-section">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-[var(--text-main)] mb-4">Educational Programs</h2>
-                <p class="text-[var(--text-muted)] max-w-2xl mx-auto">Hands-on workshops designed to turn curiosity into capability.</p>
+                <h2 class="text-5xl md:text-6xl font-bold mb-4 font-serif">Converging <span class="text-gradient italic">Sciences</span></h2>
+                <p class="text-[var(--text-muted)] max-w-3xl mx-auto font-body text-lg">
+                    Real-world challenges in the developing world do not exist in silos. Our research unit fuses <strong>Economics, Artificial Intelligence, Civil Engineering, and Physics</strong> to build resilient communities.
+                </p>
             </div>
 
-            <div class="space-y-6 max-w-4xl mx-auto">
-                <!-- Program 1 -->
-                <div class="glass-card p-6 md:p-8 rounded-2xl flex flex-col md:flex-row gap-6 hover:border-[var(--accent-color)] transition-colors group">
-                    <div class="w-full md:w-48 h-32 bg-blue-900/20 rounded-xl flex flex-col items-center justify-center border border-blue-500/30 shrink-0">
-                        <span class="text-blue-400 font-bold text-lg">Level 1</span>
-                        <span class="text-[var(--text-muted)] text-xs uppercase mt-1">Introductory</span>
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                
+                <!-- Card 1: AI & Economics -->
+                <div class="glass-card rounded-2xl overflow-hidden group hover:border-[var(--accent-color)] transition-all duration-500">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute top-4 left-4 bg-purple-900/80 backdrop-blur px-3 py-1 rounded text-xs font-bold text-white uppercase z-10">AI & Economics</div>
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="Data visualization" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition-colors">AI for Everyone: The Basics</h3>
-                        <p class="text-[var(--text-muted)] mt-2 mb-4">
-                            A non-coding introduction to what AI is, how it works, and its ethical implications. Perfect for high school students and community leaders.
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif font-bold mb-3 text-[var(--text-main)]">Computational Development</h3>
+                        <p class="text-[var(--text-muted)] text-sm font-body leading-relaxed mb-4">
+                            We utilize <strong>Machine Learning</strong> and <strong>Satellite Imagery</strong> to map economic activity in unbanked regions. By combining this with rigorous econometric modeling, we analyze poverty dynamics and the efficacy of aid interventions with unprecedented precision.
                         </p>
-                        <ul class="flex flex-wrap gap-3 text-sm text-[var(--text-muted)]">
-                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Understanding LLMs</li>
-                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Prompt Engineering</li>
-                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> AI Ethics</li>
-                        </ul>
                     </div>
                 </div>
 
-                <!-- Program 2 -->
-                <div class="glass-card p-6 md:p-8 rounded-2xl flex flex-col md:flex-row gap-6 hover:border-[var(--accent-color)] transition-colors group">
-                    <div class="w-full md:w-48 h-32 bg-green-900/20 rounded-xl flex flex-col items-center justify-center border border-green-500/30 shrink-0">
-                        <span class="text-green-400 font-bold text-lg">Level 2</span>
-                        <span class="text-[var(--text-muted)] text-xs uppercase mt-1">Intermediate</span>
+                <!-- Card 2: Civil Engineering & Physics -->
+                <div class="glass-card rounded-2xl overflow-hidden group hover:border-green-500 transition-all duration-500">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute top-4 left-4 bg-green-900/80 backdrop-blur px-3 py-1 rounded text-xs font-bold text-white uppercase z-10">Civil Eng & Physics</div>
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" alt="Construction site" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition-colors">Data Science Bootcamp</h3>
-                        <p class="text-[var(--text-muted)] mt-2 mb-4">
-                            A hands-on coding workshop using Python. Students learn to visualize data and build their first predictive models using real-world datasets relevant to their communities.
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif font-bold mb-3 text-[var(--text-main)]">Physics-Informed Infrastructure</h3>
+                        <p class="text-[var(--text-muted)] text-sm font-body leading-relaxed mb-4">
+                            Applying fundamental <strong>Physics</strong> to optimize local construction materials. Our team researches geopolymer concrete and stabilized earth blocks to create affordable, climate-resilient housing and schools in Sub-Saharan Africa.
                         </p>
-                        <ul class="flex flex-wrap gap-3 text-sm text-[var(--text-muted)]">
-                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Python Basics</li>
-                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Pandas & Matplotlib</li>
-                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Simple Regression</li>
-                        </ul>
                     </div>
                 </div>
 
-                <!-- Program 3 -->
-                <div class="glass-card p-6 md:p-8 rounded-2xl flex flex-col md:flex-row gap-6 hover:border-[var(--accent-color)] transition-colors group">
-                    <div class="w-full md:w-48 h-32 bg-purple-900/20 rounded-xl flex flex-col items-center justify-center border border-purple-500/30 shrink-0">
-                        <span class="text-purple-400 font-bold text-lg">Level 3</span>
-                        <span class="text-[var(--text-muted)] text-xs uppercase mt-1">Advanced</span>
+                <!-- Card 3: Development Studies -->
+                <div class="glass-card rounded-2xl overflow-hidden group hover:border-orange-500 transition-all duration-500">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute top-4 left-4 bg-orange-900/80 backdrop-blur px-3 py-1 rounded text-xs font-bold text-white uppercase z-10">Development</div>
+                        <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=2070&auto=format&fit=crop" alt="Community development" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition-colors">Machine Learning & Edge AI</h3>
-                        <p class="text-[var(--text-muted)] mt-2 mb-4">
-                            For advanced learners, we explore deploying AI models on small devices ("Edge Computing"). Bridging the gap between software and hardware.
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif font-bold mb-3 text-[var(--text-main)]">Human Capital Formation</h3>
+                        <p class="text-[var(--text-muted)] text-sm font-body leading-relaxed mb-4">
+                            Longitudinal studies on the impact of early STEM education on future labor market outcomes. We investigate how access to technology alters the trajectory of rural communities.
                         </p>
-                        <ul class="flex flex-wrap gap-3 text-sm text-[var(--text-muted)]">
-                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Scikit-Learn</li>
-                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Neural Networks</li>
-                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> IoT Integration</li>
-                        </ul>
                     </div>
                 </div>
+
+                <!-- Card 4: Theoretical Physics & Math -->
+                <div class="glass-card rounded-2xl overflow-hidden group hover:border-blue-500 transition-all duration-500">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute top-4 left-4 bg-blue-900/80 backdrop-blur px-3 py-1 rounded text-xs font-bold text-white uppercase z-10">Physics & Math</div>
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2070&auto=format&fit=crop" alt="Abstract Physics" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif font-bold mb-3 text-[var(--text-main)]">Complex Systems</h3>
+                        <p class="text-[var(--text-muted)] text-sm font-body leading-relaxed mb-4">
+                            Modeling economic markets as complex physical systems. We use concepts from statistical mechanics and thermodynamics to better understand market volatility and supply chain shocks.
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <!-- TEAM PAGE -->
-        <section id="team" class="page-section">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-[var(--text-main)] mb-4">Meet the Founders</h2>
-                <p class="text-[var(--text-muted)]">A diverse team of experts committed to educational equity.</p>
+        <!-- TRAINING PAGE -->
+        <section id="training" class="page-section">
+            
+            <!-- Hero Header -->
+            <div class="text-center mb-20">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] mb-6">
+                    <span class="w-2 h-2 rounded-full bg-[var(--accent-color)] animate-pulse"></span>
+                    <span class="text-xs uppercase tracking-widest text-[var(--text-muted)] font-body font-bold">Zero to AI Architect</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight text-[var(--text-main)] mb-6">
+                    The ThinkBit <br>
+                    <span class="text-gradient font-serif italic">AI Curriculum.</span>
+                </h1>
+                <p class="text-xl text-[var(--text-muted)] max-w-3xl mx-auto font-body font-light leading-relaxed">
+                    A rigorous, multidisciplinary path designed to take students from mathematical foundations to deploying Large Language Models. Bridging Computer Science, Economics, and Development.
+                </p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Member 1 -->
-                <div class="glass-card rounded-2xl overflow-hidden group">
-                    <div class="h-48 bg-gradient-to-b from-blue-600 to-[var(--bg-color)] relative flex items-end justify-center pb-4">
-                        <div class="w-32 h-32 rounded-full border-4 border-[var(--bg-color)] overflow-hidden bg-gray-800">
-                            <!-- Profile Placeholder -->
-                            <img src="https://raw.githubusercontent.com/fredericmirindi/thinkbitedge/main/fredericprofil.jpeg" alt="Frédéric Mirindi" class="w-full h-full object-cover">
+            <!-- Curriculum Roadmap -->
+            <div class="relative max-w-6xl mx-auto">
+                <!-- Vertical Center Line -->
+                <div class="timeline-line hidden md:block"></div>
+
+                <!-- Phase 1: Foundations -->
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-24 relative z-10">
+                    <div class="order-2 md:order-1 text-right pr-0 md:pr-12">
+                        <div class="inline-block bg-[var(--glass-bg)] border border-[var(--glass-border)] p-2 rounded-lg mb-4">
+                            <i class="fas fa-square-root-alt text-2xl text-[var(--accent-color)]"></i>
                         </div>
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-[var(--text-main)]">Frédéric Mirindi</h3>
-                        <p class="text-[var(--accent-color)] text-sm font-semibold mb-4">Co-Founder & Education Lead</p>
-                        <p class="text-[var(--text-muted)] text-sm mb-6">
-                            PhD Candidate in Economics & Econometrics. Lecturer at Université de Saint-Boniface. Passionate about data literacy and economic empowerment.
+                        <h3 class="text-3xl font-serif font-bold text-[var(--text-main)] mb-2">Phase I: The Mathematical Bedrock</h3>
+                        <p class="text-[var(--text-muted)] font-body mb-4">
+                            Before coding, we build logic. Understanding the algebra behind the algorithms ensures students aren't just "black box" users.
                         </p>
+                        <ul class="text-sm font-mono text-[var(--text-muted)] space-y-2 inline-block text-right">
+                            <li class="border-b border-[var(--glass-border)] pb-1">Linear Algebra (Vectors, Matrices, Eigenvalues)</li>
+                            <li class="border-b border-[var(--glass-border)] pb-1">Multivariable Calculus (Gradient Descent)</li>
+                            <li class="border-b border-[var(--glass-border)] pb-1">Probability Theory & Bayesian Statistics</li>
+                            <li>Intro to Python & Algorithmic Logic</li>
+                        </ul>
+                    </div>
+                    <div class="order-1 md:order-2 pl-0 md:pl-12">
+                        <div class="glass-card p-2 rounded-2xl overflow-hidden h-64 group relative">
+                            <div class="absolute top-4 right-4 bg-black/60 backdrop-blur px-2 py-1 rounded text-xs text-white z-10 font-bold">Practical Lab</div>
+                            <!-- STUDENTS CODING PICTURE -->
+                            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop" alt="Students coding in Africa" class="w-full h-full object-cover rounded-xl curriculum-img">
+                        </div>
                     </div>
                 </div>
 
-                <!-- Member 2 -->
-                <div class="glass-card rounded-2xl overflow-hidden group">
-                    <div class="h-48 bg-gradient-to-b from-green-600 to-[var(--bg-color)] relative flex items-end justify-center pb-4">
-                        <div class="w-32 h-32 rounded-full border-4 border-[var(--bg-color)] overflow-hidden bg-gray-800">
-                            <img src="https://raw.githubusercontent.com/fredericmirindi/thinkbitedge/main/Derrick%20Mirindi.png" alt="Derrick Mirindi" class="w-full h-full object-cover">
+                <!-- Phase 2: Data Science -->
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-24 relative z-10">
+                    <div class="order-1 pr-0 md:pr-12">
+                        <div class="glass-card p-2 rounded-2xl overflow-hidden h-64 group">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="Data Analytics" class="w-full h-full object-cover rounded-xl curriculum-img">
                         </div>
                     </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-[var(--text-main)]">Derrick Mirindi</h3>
-                        <p class="text-[var(--accent-color)] text-sm font-semibold mb-4">Co-Founder & Tech Lead</p>
-                        <p class="text-[var(--text-muted)] text-sm mb-6">
-                            Driving the technical vision of ThinkBitEdge. Focusing on software infrastructure and hands-on coding curriculums.
+                    <div class="order-2 pl-0 md:pl-12">
+                        <div class="inline-block bg-[var(--glass-bg)] border border-[var(--glass-border)] p-2 rounded-lg mb-4">
+                            <i class="fas fa-database text-2xl text-green-400"></i>
+                        </div>
+                        <h3 class="text-3xl font-serif font-bold text-[var(--text-main)] mb-2">Phase II: Data Science & Econometrics</h3>
+                        <p class="text-[var(--text-muted)] font-body mb-4">
+                            Merging computer science with economic rigor. Students learn to clean, visualize, and infer causality from complex datasets.
                         </p>
+                        <ul class="text-sm font-mono text-[var(--text-muted)] space-y-2">
+                            <li class="border-b border-[var(--glass-border)] pb-1">Data Manipulation (Pandas, SQL)</li>
+                            <li class="border-b border-[var(--glass-border)] pb-1">Visualization (Matplotlib, Seaborn, Tableau)</li>
+                            <li class="border-b border-[var(--glass-border)] pb-1">Econometrics (Causal Inference, Statsmodels)</li>
+                            <li>Feature Engineering & Preprocessing</li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- Member 3 -->
-                <div class="glass-card rounded-2xl overflow-hidden group">
-                    <div class="h-48 bg-gradient-to-b from-purple-600 to-[var(--bg-color)] relative flex items-end justify-center pb-4">
-                        <div class="w-32 h-32 rounded-full border-4 border-[var(--bg-color)] overflow-hidden bg-gray-800">
-                            <img src="https://raw.githubusercontent.com/fredericmirindi/thinkbitedge/main/patricemirindi.jpg" alt="Patrice Mirindi" class="w-full h-full object-cover">
+                <!-- Phase 3: Machine Learning -->
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-24 relative z-10">
+                    <div class="order-2 md:order-1 text-right pr-0 md:pr-12">
+                        <div class="inline-block bg-[var(--glass-bg)] border border-[var(--glass-border)] p-2 rounded-lg mb-4">
+                            <i class="fas fa-brain text-2xl text-purple-400"></i>
+                        </div>
+                        <h3 class="text-3xl font-serif font-bold text-[var(--text-main)] mb-2">Phase III: Core Machine Learning</h3>
+                        <p class="text-[var(--text-muted)] font-body mb-4">
+                            The engine of prediction. Mastering the classical algorithms that drive decision-making in finance, health, and policy.
+                        </p>
+                        <ul class="text-sm font-mono text-[var(--text-muted)] space-y-2 inline-block text-right">
+                            <li class="border-b border-[var(--glass-border)] pb-1">Supervised Learning (Regression, Classification)</li>
+                            <li class="border-b border-[var(--glass-border)] pb-1">Unsupervised Learning (Clustering, PCA)</li>
+                            <li class="border-b border-[var(--glass-border)] pb-1">Model Evaluation & Validation Strategies</li>
+                            <li>Scikit-Learn Mastery</li>
+                        </ul>
+                    </div>
+                    <div class="order-1 md:order-2 pl-0 md:pl-12">
+                        <div class="glass-card p-2 rounded-2xl overflow-hidden h-64 group">
+                            <img src="https://images.unsplash.com/photo-1527474305487-20709d1a6875?q=80&w=2070&auto=format&fit=crop" alt="Collaborative coding" class="w-full h-full object-cover rounded-xl curriculum-img">
                         </div>
                     </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold text-[var(--text-main)]">Patrice Mirindi</h3>
-                        <p class="text-[var(--accent-color)] text-sm font-semibold mb-4">Co-Founder & Strategy</p>
-                        <p class="text-[var(--text-muted)] text-sm mb-6">
-                            Leading community outreach and strategic partnerships. Ensuring our programs reach the communities that need them most.
+                </div>
+
+                <!-- Phase 4: Deep Learning & GenAI -->
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-24 relative z-10">
+                    <div class="order-1 pr-0 md:pr-12">
+                        <div class="glass-card p-2 rounded-2xl overflow-hidden h-64 group">
+                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop" alt="AI Neural Network representation" class="w-full h-full object-cover rounded-xl curriculum-img">
+                        </div>
+                    </div>
+                    <div class="order-2 pl-0 md:pl-12">
+                        <div class="inline-block bg-[var(--glass-bg)] border border-[var(--glass-border)] p-2 rounded-lg mb-4">
+                            <i class="fas fa-network-wired text-2xl text-pink-400"></i>
+                        </div>
+                        <h3 class="text-3xl font-serif font-bold text-[var(--text-main)] mb-2">Phase IV: Deep Learning & GenAI</h3>
+                        <p class="text-[var(--text-muted)] font-body mb-4">
+                            The frontier of innovation. Building Neural Networks and leveraging LLMs for complex reasoning tasks.
                         </p>
+                        <ul class="text-sm font-mono text-[var(--text-muted)] space-y-2">
+                            <li class="border-b border-[var(--glass-border)] pb-1">Neural Networks (PyTorch / TensorFlow)</li>
+                            <li class="border-b border-[var(--glass-border)] pb-1">NLP & Computer Vision (Transformers)</li>
+                            <li class="border-b border-[var(--glass-border)] pb-1">Fine-Tuning LLMs & RAG Systems</li>
+                            <li>Generative Models (Diffusion, GANs)</li>
+                        </ul>
                     </div>
                 </div>
+
+                <!-- Phase 5: Deployment & Ethics -->
+                <div class="grid md:grid-cols-2 gap-12 items-center relative z-10">
+                    <div class="order-2 md:order-1 text-right pr-0 md:pr-12">
+                        <div class="inline-block bg-[var(--glass-bg)] border border-[var(--glass-border)] p-2 rounded-lg mb-4">
+                            <i class="fas fa-server text-2xl text-yellow-400"></i>
+                        </div>
+                        <h3 class="text-3xl font-serif font-bold text-[var(--text-main)] mb-2">Phase V: Deployment & AI Ethics</h3>
+                        <p class="text-[var(--text-muted)] font-body mb-4">
+                            Taking models from notebooks to production, while ensuring fairness, transparency, and safety in the Global South context.
+                        </p>
+                        <ul class="text-sm font-mono text-[var(--text-muted)] space-y-2 inline-block text-right">
+                            <li class="border-b border-[var(--glass-border)] pb-1">MLOps (Docker, APIs, Cloud Deployment)</li>
+                            <li class="border-b border-[var(--glass-border)] pb-1">AI Safety & Bias Mitigation</li>
+                            <li class="border-b border-[var(--glass-border)] pb-1">Project Management for AI</li>
+                            <li>Capstone Project Defense</li>
+                        </ul>
+                    </div>
+                    <div class="order-1 md:order-2 pl-0 md:pl-12">
+                        <div class="glass-card p-2 rounded-2xl overflow-hidden h-64 group">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop" alt="Team collaboration" class="w-full h-full object-cover rounded-xl curriculum-img">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center mt-24">
+                <div class="glass-card inline-block p-8 rounded-2xl border-t-4 border-[var(--accent-color)]">
+                    <h3 class="text-2xl font-serif font-bold mb-4">Ready to start the journey?</h3>
+                    <p class="text-[var(--text-muted)] font-body mb-6">Download the full syllabus PDF or apply for the next cohort.</p>
+                    <div class="flex gap-4 justify-center">
+                        <button class="px-6 py-3 border border-[var(--glass-border)] rounded-lg hover:bg-[var(--glass-bg)] transition font-bold text-sm uppercase font-body flex items-center gap-2">
+                            <i class="fas fa-file-pdf"></i> Syllabus
+                        </button>
+                        <button onclick="navigateTo('contact')" class="btn-primary px-8 py-3 rounded-lg font-bold text-sm uppercase font-body">
+                            Apply Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- PUBLICATIONS PAGE -->
+        <section id="publications" class="page-section">
+            <div class="max-w-5xl mx-auto">
+                
+                <!-- Header -->
+                <div class="flex flex-col md:flex-row items-center justify-between mb-16 border-b border-[var(--glass-border)] pb-8 gap-4">
+                    <div>
+                        <h2 class="text-5xl font-serif font-bold text-gradient leading-tight">Research <span class="text-[var(--text-main)]">Library</span></h2>
+                        <p class="text-[var(--text-muted)] mt-2 font-body">Selected works in AI, Economics, Civil Engineering, and Development.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="px-5 py-2 text-xs font-bold font-body uppercase tracking-wider rounded-full bg-[var(--accent-color)] text-black">All</button>
+                    </div>
+                </div>
+
+                <!-- 2026 & Forthcoming -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-serif font-bold text-[var(--text-main)] mb-6 flex items-center gap-3">
+                        <i class="far fa-clock text-[var(--accent-color)]"></i> Forthcoming & 2026
+                    </h3>
+                    <div class="space-y-4">
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Revolutionizing medical imaging and diagnostics through advanced AI and augmented reality technologies</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Mirindi, F Mirindi, A Khang — <span class="italic">Revolutionizing Digital Healthcare Through Artificial Intelligence</span> (2026)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-green-900/30 text-green-300 text-[10px] rounded border border-green-500/20 font-mono">Health AI</span>
+                        </article>
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Integration of AI and AR in medical imaging: A quantitative analysis of workflow optimization and diagnostic performance</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">A Khang, F Mirindi, D Mirindi — <span class="italic">Revolutionizing Digital Healthcare Through Artificial Intelligence</span> (2026)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-green-900/30 text-green-300 text-[10px] rounded border border-green-500/20 font-mono">Health AI</span>
+                        </article>
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Optimizing ML algorithms for real-time privacy-preserving patient monitoring in embedded systems</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">F Mirindi, A Khang, D Mirindi — <span class="italic">Revolutionizing Digital Healthcare Through Artificial Intelligence</span> (2026)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-purple-900/30 text-purple-300 text-[10px] rounded border border-purple-500/20 font-mono">Machine Learning</span>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- 2025 -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-serif font-bold text-[var(--text-main)] mb-6 flex items-center gap-3">
+                        <i class="far fa-calendar-alt text-[var(--accent-color)]"></i> 2025
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- AI & Transpo -->
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Artificial Intelligence (AI) and automation for driving green transportation systems: A comprehensive review</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Mirindi, A Khang, F Mirindi — <span class="italic">Driving Green Transportation System Through AI</span> (2025)</p>
+                            <div class="flex gap-2 mt-2">
+                                <span class="px-2 py-0.5 bg-blue-900/30 text-blue-300 text-[10px] rounded border border-blue-500/20 font-mono">AI</span>
+                                <span class="px-2 py-0.5 bg-green-900/30 text-green-300 text-[10px] rounded border border-green-500/20 font-mono">Sustainability</span>
+                            </div>
+                        </article>
+                        
+                        <!-- Civil Eng / Materials -->
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Ensemble machine learning algorithms for efficient prediction of compressive strength of concrete containing tyre rubber and brick powder</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Sinkhonde, T Bezabih, D Mirindi, D Mashava, F Mirindi — <span class="italic">Cleaner Waste Systems</span> (2025)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-orange-900/30 text-orange-300 text-[10px] rounded border border-orange-500/20 font-mono">Civil Eng</span>
+                        </article>
+
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Predicting the compressive strength of rubberized concrete incorporating brick powder based on MLP and RBF neural networks</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Sinkhonde, D Mashava, T Bezabih, D Mirindi — <span class="italic">Waste Management Bulletin</span> (2025)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-orange-900/30 text-orange-300 text-[10px] rounded border border-orange-500/20 font-mono">Civil Eng</span>
+                        </article>
+
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Applications of machine learning algorithms on the compressive strength of laterite blocks made with metakaolin-based geopolymer and sugarcane molasses</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Sinkhonde, D Mirindi, I Dabakuyo, T Bezabih... F Mirindi — <span class="italic">Waste Management Bulletin</span> (2025)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-purple-900/30 text-purple-300 text-[10px] rounded border border-purple-500/20 font-mono">ML & Civil</span>
+                        </article>
+
+                        <!-- Economics & AI -->
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Neural Networks for Predicting Market Trends in Sustainable Industries: A Review</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">F Mirindi, D Mirindi — <span class="italic">Recent Advances in AI for Sustainable Development</span> (2025)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-blue-900/30 text-blue-300 text-[10px] rounded border border-blue-500/20 font-mono">Economics</span>
+                        </article>
+
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">SEF-Net: A Hybrid Deep Learning Architecture for Multi-step Forecasting in Sustainable Energy Markets</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">F Mirindi, D Mirindi — <span class="italic">International Work-Conference on Artificial Neural Networks</span> (2025)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-blue-900/30 text-blue-300 text-[10px] rounded border border-blue-500/20 font-mono">Energy Economics</span>
+                        </article>
+
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Forecasting Energy Prices Using Machine Learning Algorithms: A Comparative Analysis</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">F Mirindi, D Mirindi — <span class="italic">Machine Learning Technologies on Energy Economics</span> (2025)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-blue-900/30 text-blue-300 text-[10px] rounded border border-blue-500/20 font-mono">Economics</span>
+                        </article>
+
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Predictive Analytics and Stochastic Programming for Construction Resource Optimization in Developing African Economies</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">F Mirindi, D Mirindi — <span class="italic">CBPM 2025 Conference Proceedings</span> (2025)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-yellow-900/30 text-yellow-300 text-[10px] rounded border border-yellow-500/20 font-mono">Development</span>
+                        </article>
+
+                        <!-- Tech & Society -->
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Advance toward Artificial Superintelligence with OpenAI's O1 reinforcement learning and ethics</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Mirindi, D Sinkhonde, F Mirindi, T Bezabith — <span class="italic">6th International Conference on AI & Robotics</span> (2025)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-red-900/30 text-red-300 text-[10px] rounded border border-red-500/20 font-mono">AI Ethics</span>
+                        </article>
+
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Advanced evaluation of BIM-GenAI using OpenAI o1 and ethical considerations</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Mirindi, D Sinkhonde, F Mirindi, T Bezabith — <span class="italic">Proceedings of 2025 Computers and People Research</span> (2025)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-red-900/30 text-red-300 text-[10px] rounded border border-red-500/20 font-mono">AI Ethics</span>
+                        </article>
+
+                        <!-- More Civil Eng 2025 -->
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">On the surface roughness properties of fly ash-based geopolymer mortars with teff straw ash</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">T Bezabih, D Sinkhonde, D Mirindi — <span class="italic">Green Technologies and Sustainability</span> (2025)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-orange-900/30 text-orange-300 text-[10px] rounded border border-orange-500/20 font-mono">Civil Eng</span>
+                        </article>
+
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Prediction of flexural and split tensile strength of waste glass-concrete composite using machine learning algorithms</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Mirindi, D Sinkhonde... F Mirindi — <span class="italic">Green Technologies and Sustainability</span> (2025)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-purple-900/30 text-purple-300 text-[10px] rounded border border-purple-500/20 font-mono">ML & Civil</span>
+                        </article>
+
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Machine learning-driven analysis of nanoparticle performance on concrete mechanical properties</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Mirindi, J Hunter, D Sinkhonde, F Mirindi — <span class="italic">Manufacturing Letters</span> (2025)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-purple-900/30 text-purple-300 text-[10px] rounded border border-purple-500/20 font-mono">Nano-Tech</span>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- 2024 -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-serif font-bold text-[var(--text-main)] mb-6 flex items-center gap-3">
+                        <i class="far fa-calendar-check text-[var(--accent-color)]"></i> 2024
+                    </h3>
+                    <div class="space-y-4">
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">A review of the advances in artificial intelligence in transportation system development</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Mirindi — <span class="italic">Journal of Civil, Construction and Environmental Engineering</span> (2024)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-blue-900/30 text-blue-300 text-[10px] rounded border border-blue-500/20 font-mono">AI & Transpo</span>
+                        </article>
+
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">A system dynamics modelling assessment of water-energy-food resource demand futures at the city scale: Goma, DR Congo</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Mirindi, J Sušnik, S Masia, G Jewitt — <span class="italic">World Development Sustainability</span> (2024)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-yellow-900/30 text-yellow-300 text-[10px] rounded border border-yellow-500/20 font-mono">Development</span>
+                        </article>
+
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Integration of artificial intelligence and smart technologies in offsite construction: a comprehensive review</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Mirindi, TN Sanders, J Hunter — <span class="italic">Transforming Construction with Off-site Methods</span> (2024)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-orange-900/30 text-orange-300 text-[10px] rounded border border-orange-500/20 font-mono">Construction AI</span>
+                        </article>
+
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">An advance review of Urban-AI and ethical considerations</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Mirindi, D Sinkhonde, F Mirindi — <span class="italic">ACM SIGSPATIAL Workshop</span> (2024)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-red-900/30 text-red-300 text-[10px] rounded border border-red-500/20 font-mono">Ethics</span>
+                        </article>
+
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Structural Performance of Three-Layer Particleboards with Waste Fiber Reinforcement: A Review</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Mirindi, J Hunter... — <span class="italic">DFI Journal</span> (2024)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-orange-900/30 text-orange-300 text-[10px] rounded border border-orange-500/20 font-mono">Materials</span>
+                        </article>
+
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Rethinking sustainability: towards an open system approach</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">F Yazdandoust, D Mirindi — <span class="italic">Proceedings of DARCH</span> (2024)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-green-900/30 text-green-300 text-[10px] rounded border border-green-500/20 font-mono">Sustainability</span>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- 2021-2022 -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-serif font-bold text-[var(--text-main)] mb-6 flex items-center gap-3 opacity-80">
+                        <i class="far fa-file-alt text-[var(--accent-color)]"></i> 2021-2023
+                    </h3>
+                    <div class="space-y-4">
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Structural Performance of Particleboard Made From Macadamia Nutshells with Gum Arabic Composite</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Mirindi — <span class="italic">Pan Africa University Institute</span> (2022)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-gray-800 text-gray-300 text-[10px] rounded border border-gray-600 font-mono">Research</span>
+                        </article>
+
+                        <article class="glass-card p-6 rounded-xl hover:border-[var(--accent-color)] transition group">
+                            <h4 class="text-lg font-bold text-[var(--text-main)] group-hover:text-[var(--accent-color)] transition">Physico-mechanical properties of particleboards produced from macadamia nutshell and gum arabic</h4>
+                            <p class="text-sm text-[var(--text-muted)] mt-1 font-body">D Mirindi, RO Onchiri, J Thuo — <span class="italic">Applied Sciences</span> (2021)</p>
+                            <span class="inline-block mt-2 px-2 py-0.5 bg-gray-800 text-gray-300 text-[10px] rounded border border-gray-600 font-mono">Applied Sci</span>
+                        </article>
+                    </div>
+                </div>
+
             </div>
         </section>
 
         <!-- CONTACT PAGE -->
         <section id="contact" class="page-section">
-            <div class="max-w-2xl mx-auto">
-                <div class="glass-card rounded-2xl p-8 md:p-12">
-                    <h2 class="text-3xl font-bold text-[var(--text-main)] mb-2">Partner With Us</h2>
-                    <p class="text-[var(--text-muted)] mb-8">Interested in hosting a workshop, volunteering, or sponsoring our mission? Get in touch.</p>
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16">
+                <div class="flex flex-col justify-center">
+                    <h2 class="text-5xl font-bold mb-6 font-serif">Join the <span class="text-gradient italic">Mission.</span></h2>
+                    <p class="text-[var(--text-muted)] mb-10 text-lg font-body leading-relaxed">
+                        We are looking for partners, donors, and volunteers to help us scale our impact. Your support changes lives.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-6 glass-card p-5 rounded-xl border-l-4 border-[var(--accent-color)]">
+                            <div class="w-12 h-12 rounded-full bg-[var(--accent-glow)] flex items-center justify-center text-[var(--accent-color)]">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-[var(--text-muted)] uppercase tracking-widest font-body mb-1">Email</p>
+                                <p class="font-bold text-lg font-body">foundation@thinkbitedge.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-6 glass-card p-5 rounded-xl border-l-4 border-[var(--accent-color)]">
+                            <div class="w-12 h-12 rounded-full bg-[var(--accent-glow)] flex items-center justify-center text-[var(--accent-color)]">
+                                <i class="fas fa-hand-holding-heart text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-[var(--text-muted)] uppercase tracking-widest font-body mb-1">Support Us</p>
+                                <p class="font-bold text-lg font-body">Donate or Volunteer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                    <form onsubmit="event.preventDefault(); window.location.href='mailto:info@thinkbitedge.ca';" class="space-y-6">
-                        <div class="grid md:grid-cols-2 gap-6">
+                <div class="glass-card p-10 rounded-3xl relative overflow-hidden">
+                    <!-- Decorative blur -->
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-[var(--accent-color)] opacity-10 blur-3xl rounded-full"></div>
+
+                    <form class="space-y-6 relative z-10" onsubmit="event.preventDefault(); alert('Thank you for contacting ThinkBit Edge Foundation!');">
+                        <div class="grid grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-medium text-[var(--text-muted)] mb-2">Name</label>
-                                <input type="text" class="w-full bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-lg px-4 py-3 text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-color)] transition" placeholder="Jane Doe">
+                                <label class="text-xs text-[var(--text-muted)] uppercase font-bold mb-2 block font-body tracking-wider">First Name</label>
+                                <input type="text" class="w-full bg-[var(--bg-color)] border border-[var(--glass-border)] rounded-lg p-4 focus:outline-none focus:border-[var(--accent-color)] transition font-body">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-[var(--text-muted)] mb-2">Email</label>
-                                <input type="email" class="w-full bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-lg px-4 py-3 text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-color)] transition" placeholder="jane@example.com">
+                                <label class="text-xs text-[var(--text-muted)] uppercase font-bold mb-2 block font-body tracking-wider">Last Name</label>
+                                <input type="text" class="w-full bg-[var(--bg-color)] border border-[var(--glass-border)] rounded-lg p-4 focus:outline-none focus:border-[var(--accent-color)] transition font-body">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-[var(--text-muted)] mb-2">Organization</label>
-                            <input type="text" class="w-full bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-lg px-4 py-3 text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-color)] transition" placeholder="School / Company Name">
+                            <label class="text-xs text-[var(--text-muted)] uppercase font-bold mb-2 block font-body tracking-wider">Email</label>
+                            <input type="email" class="w-full bg-[var(--bg-color)] border border-[var(--glass-border)] rounded-lg p-4 focus:outline-none focus:border-[var(--accent-color)] transition font-body">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-[var(--text-muted)] mb-2">Message</label>
-                            <textarea rows="4" class="w-full bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-lg px-4 py-3 text-[var(--text-main)] focus:outline-none focus:border-[var(--accent-color)] transition" placeholder="How can we collaborate?"></textarea>
+                            <label class="text-xs text-[var(--text-muted)] uppercase font-bold mb-2 block font-body tracking-wider">I want to...</label>
+                            <div class="relative">
+                                <select class="w-full bg-[var(--bg-color)] border border-[var(--glass-border)] rounded-lg p-4 focus:outline-none focus:border-[var(--accent-color)] transition text-[var(--text-muted)] font-body appearance-none">
+                                    <option>Volunteer</option>
+                                    <option>Partner as a School</option>
+                                    <option>Make a Donation</option>
+                                    <option>General Inquiry</option>
+                                </select>
+                                <i class="fas fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-[var(--text-muted)] text-xs pointer-events-none"></i>
+                            </div>
                         </div>
-                        <button type="submit" class="w-full px-8 py-4 btn-tech rounded-lg font-bold text-lg transition">
-                            Send Message
-                        </button>
+                        <button type="submit" class="w-full btn-primary py-4 rounded-lg font-bold uppercase tracking-widest text-sm shadow-lg shadow-[var(--accent-glow)]">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -528,20 +901,62 @@
 
     </main>
 
-    <footer class="relative z-10 border-t border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-sm mt-auto">
-        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 flex justify-between items-center flex-col md:flex-row">
-            <p class="text-[var(--text-muted)] text-sm">© 2025 ThinkBitEdge Corp. Empowering Canada.</p>
-            <div class="flex space-x-6 mt-4 md:mt-0 text-[var(--text-muted)]">
-                <a href="#" class="hover:text-[var(--accent-color)] transition"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="hover:text-[var(--accent-color)] transition"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="hover:text-[var(--accent-color)] transition"><i class="fab fa-instagram"></i></a>
+    <!-- Footer -->
+    <footer class="border-t border-[var(--glass-border)] bg-[var(--bg-color)] relative z-10 py-10 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center justify-center text-center">
+            <!-- Mini Logo -->
+            <div class="flex items-center gap-2 mb-4 opacity-80">
+                <svg class="w-6 h-6" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="footerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:var(--text-muted);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:var(--text-main);stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M50 5 L90 27 L90 73 L50 95 L10 73 L10 27 Z" fill="none" stroke="url(#footerGradient)" stroke-width="6"/>
+                    <circle cx="50" cy="50" r="10" fill="url(#footerGradient)" />
+                </svg>
+                <span class="font-serif font-bold text-lg text-[var(--text-main)]">ThinkBit Edge Inc.</span>
             </div>
+            <p class="text-sm text-[var(--text-muted)] font-body">© 2025 All Rights Reserved. CEO Frédéric Mirindi.</p>
+            <p class="text-xs text-[var(--text-muted)] mt-2 font-body">A Registered Non-Governmental Organization.</p>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- Scripts -->
     <script>
-        // --- 1. THEME TOGGLE ---
+        // --- Navigation Logic ---
+        function navigateTo(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            // Show target
+            const target = document.getElementById(sectionId);
+            if(target) target.classList.add('active');
+
+            // Update Nav Buttons
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            const activeBtn = document.getElementById('nav-' + sectionId);
+            if(activeBtn) activeBtn.classList.add('active');
+
+            // Close Mobile Menu
+            const mobileMenu = document.getElementById('mobile-menu');
+            if(!mobileMenu.classList.contains('hidden') && window.innerWidth < 768) {
+                mobileMenu.classList.add('hidden');
+            }
+
+            window.scrollTo(0,0);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // --- Theme Logic ---
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById('theme-icon');
@@ -549,147 +964,107 @@
             
             if (html.classList.contains('light')) {
                 html.classList.remove('light');
-                icon.classList.remove('fa-sun'); icon.classList.add('fa-moon');
-                iconMobile.classList.remove('fa-sun'); iconMobile.classList.add('fa-moon');
-                updateThreeJSTheme('dark');
+                html.classList.add('dark');
+                if(icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
+                if(iconMobile) { iconMobile.classList.remove('fa-sun'); iconMobile.classList.add('fa-moon'); }
+                updateThreeJSColor(0xffffff);
             } else {
+                html.classList.remove('dark');
                 html.classList.add('light');
-                icon.classList.remove('fa-moon'); icon.classList.add('fa-sun');
-                iconMobile.classList.remove('fa-moon'); iconMobile.classList.add('fa-sun');
-                updateThreeJSTheme('light');
+                if(icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+                if(iconMobile) { iconMobile.classList.remove('fa-moon'); iconMobile.classList.add('fa-sun'); }
+                updateThreeJSColor(0x0f172a);
             }
         }
 
-        // --- 2. NAVIGATION ---
-        function navigateTo(sectionId) {
-            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
+        // --- Three.js Background ---
+        let scene, camera, renderer, particlesMesh;
 
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            const btn = document.getElementById('nav-' + sectionId);
-            if(btn) btn.classList.add('active');
+        function initThreeJS() {
+            const container = document.getElementById('canvas-container');
+            scene = new THREE.Scene();
+            // Fog matches bg color
+            scene.fog = new THREE.FogExp2(0x030712, 0.002); 
 
-            document.getElementById('mobile-menu').classList.add('hidden');
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 30;
+
+            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // Particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const count = 1200; // Dense for "Tech" feel
+            const posArray = new Float32Array(count * 3);
+
+            for(let i=0; i < count * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 100;
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
             
-            // Camera Movement
-            moveCameraForSection(sectionId);
-            window.scrollTo(0,0);
-        }
+            const material = new THREE.PointsMaterial({
+                size: 0.15,
+                color: 0xffffff, // Default dark mode color
+                transparent: true,
+                opacity: 0.6
+            });
 
-        function toggleMobileMenu() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        }
+            particlesMesh = new THREE.Points(particlesGeometry, material);
+            scene.add(particlesMesh);
 
-        // --- 3. THREE.JS BACKGROUND ---
-        const scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x020617, 0.002); // Dark fog default
-
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-        // OBJECTS
-        const particlesGeo = new THREE.BufferGeometry();
-        const particlesCount = 400;
-        const posArray = new Float32Array(particlesCount * 3);
-        for(let i = 0; i < particlesCount * 3; i++) posArray[i] = (Math.random() - 0.5) * 50;
-        particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        
-        const particlesMat = new THREE.PointsMaterial({ size: 0.08, color: 0x10b981, transparent: true, opacity: 0.8 });
-        const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
-        scene.add(particlesMesh);
-
-        // Floating "Bits" (Cubes)
-        const cubesGroup = new THREE.Group();
-        const cubeGeo = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-        const cubeMat = new THREE.MeshBasicMaterial({ color: 0x3b82f6, wireframe: true, transparent: true, opacity: 0.3 });
-        
-        for(let i=0; i<20; i++) {
-            const cube = new THREE.Mesh(cubeGeo, cubeMat);
-            cube.position.set((Math.random()-0.5)*40, (Math.random()-0.5)*40, (Math.random()-0.5)*40);
-            cube.rotation.set(Math.random()*Math.PI, Math.random()*Math.PI, 0);
-            cubesGroup.add(cube);
-        }
-        scene.add(cubesGroup);
-
-        // Connections
-        const lineMat = new THREE.LineBasicMaterial({ color: 0x10b981, transparent: true, opacity: 0.15 });
-        // (Simplified connection logic for performance) - A central network
-        const linesGeo = new THREE.BufferGeometry();
-        const linePoints = [];
-        for(let i=0; i<30; i++) {
-            linePoints.push(new THREE.Vector3((Math.random()-0.5)*30, (Math.random()-0.5)*30, (Math.random()-0.5)*30));
-            linePoints.push(new THREE.Vector3(0,0,0)); // Connect to center
-        }
-        linesGeo.setFromPoints(linePoints);
-        const networkLines = new THREE.LineSegments(linesGeo, lineMat);
-        scene.add(networkLines);
-
-        camera.position.z = 20;
-
-        // Interaction
-        let mouseX = 0, mouseY = 0;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX - window.innerWidth/2) * 0.001;
-            mouseY = (e.clientY - window.innerHeight/2) * 0.001;
-        });
-
-        function updateThreeJSTheme(mode) {
-            if (mode === 'light') {
-                scene.fog.color.setHex(0xf0f9ff);
-                particlesMat.color.setHex(0x0284c7);
-                cubeMat.color.setHex(0x2563eb);
-                lineMat.color.setHex(0x0284c7);
-            } else {
-                scene.fog.color.setHex(0x020617);
-                particlesMat.color.setHex(0x10b981);
-                cubeMat.color.setHex(0x3b82f6);
-                lineMat.color.setHex(0x10b981);
+            // Add connecting lines for "Neural Network" feel
+            const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0ea5e9, transparent: true, opacity: 0.15 });
+            const lineGeometry = new THREE.BufferGeometry();
+            
+            const points = [];
+            for(let i=0; i<100; i++) {
+                points.push(new THREE.Vector3((Math.random()-0.5)*60, (Math.random()-0.5)*60, (Math.random()-0.5)*60));
             }
+            lineGeometry.setFromPoints(points);
+            const lines = new THREE.Line(lineGeometry, lineMaterial);
+            scene.add(lines);
+
+            animate();
         }
 
-        // Animate
-        let targetZ = 20;
-        function moveCameraForSection(id) {
-            if(id === 'home') targetZ = 20;
-            if(id === 'mission') targetZ = 25;
-            if(id === 'programs') targetZ = 15; // Close up
-            if(id === 'team') targetZ = 30;
-            if(id === 'contact') targetZ = 35;
+        function updateThreeJSColor(colorHex) {
+            if(particlesMesh) particlesMesh.material.color.setHex(colorHex);
+            if(scene.fog) scene.fog.color.setHex(document.documentElement.classList.contains('light') ? 0xf8fafc : 0x030712);
         }
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = event.clientX - window.innerWidth / 2;
+            mouseY = event.clientY - window.innerHeight / 2;
+        });
 
         function animate() {
             requestAnimationFrame(animate);
             
-            particlesMesh.rotation.y += 0.001;
-            particlesMesh.rotation.x += 0.0005;
-            
-            cubesGroup.rotation.y -= 0.002;
-            cubesGroup.children.forEach(cube => {
-                cube.rotation.x += 0.01;
-                cube.rotation.y += 0.01;
-            });
+            // Gentle rotation
+            particlesMesh.rotation.y += 0.0005;
+            particlesMesh.rotation.x += 0.0002;
 
-            networkLines.rotation.z += 0.001;
-
-            // Mouse Parallax
-            camera.position.x += (mouseX * 5 - camera.position.x) * 0.05;
-            camera.position.y += (-mouseY * 5 - camera.position.y) * 0.05;
-            camera.position.z += (targetZ - camera.position.z) * 0.05;
-            camera.lookAt(scene.position);
+            // Mouse interaction
+            particlesMesh.rotation.y += mouseX * 0.00001;
+            particlesMesh.rotation.x += mouseY * 0.00001;
 
             renderer.render(scene, camera);
         }
-        animate();
 
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
+
+        // Init
+        initThreeJS();
     </script>
 </body>
 </html>
